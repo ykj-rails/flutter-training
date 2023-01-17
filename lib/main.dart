@@ -51,72 +51,80 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Column(
-                children: <Widget>[
-                  const AspectRatio(
-                    aspectRatio: 1,
-                    child: Placeholder(),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16, bottom: 16),
-                        child: Text(
-                          '** ℃',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge
-                              ?.copyWith(color: Colors.blue),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 16, bottom: 16),
-                        child: Text(
-                          '** ℃',
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .labelLarge
-                              ?.copyWith(color: Colors.red),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+              Expanded(
+                child: Container(),
               ),
-              Column(
-                children: <Widget>[
-                  const Padding(
-                    padding: EdgeInsets.only(top: 80),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(top: 16, bottom: 16),
-                        child: TextButton(
-                          onPressed: null,
+              Expanded(
+                child: Column(
+                  children: <Widget>[
+                    const AspectRatio(
+                      aspectRatio: 1,
+                      child: Placeholder(),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16, bottom: 16),
                           child: Text(
-                            'Close',
-                            style: TextStyle(color: Colors.blue),
+                            '** ℃',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(color: Colors.blue),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(top: 16, bottom: 16),
-                        child: TextButton(
-                          onPressed: null,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16, bottom: 16),
                           child: Text(
-                            'Reload',
-                            style: TextStyle(color: Colors.blue),
+                            '** ℃',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context)
+                                .textTheme
+                                .labelLarge
+                                ?.copyWith(color: Colors.red),
                           ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    const Padding(
+                      padding: EdgeInsets.only(top: 80),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: const <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(top: 16, bottom: 16),
+                          child: TextButton(
+                            onPressed: null,
+                            child: Text(
+                              'Close',
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.only(top: 16, bottom: 16),
+                          child: TextButton(
+                            onPressed: null,
+                            child: Text(
+                              'Reload',
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ],
           ),
