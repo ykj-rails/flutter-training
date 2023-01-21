@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:yumemi_weather/yumemi_weather.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,21 +9,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
       home: MyHomePage(),
@@ -29,20 +21,45 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+// MyHomePageのState
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String _weatherCondition = '';
+
+  String _getWeatherCondition() {
+    final yumemiWeather = YumemiWeather();
+    final weatherCondition = yumemiWeather.fetchSimpleWeather();
+    return weatherCondition;
+  }
+
+  void _setWeatherCondition() {
+    setState(() {
+      _weatherCondition = _getWeatherCondition();
+    });
+  }
+
+  String _getWeatherPath() {
+    switch (_weatherCondition) {
+      case 'sunny':
+        return 'assets/sunny.svg';
+      case 'cloudy':
+        return 'assets/cloudy.svg';
+      case 'rainy':
+        return 'assets/rainy.svg';
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text('Flutter appr'),
+        title: const Text('Flutter app'),
       ),
       body: Container(
         alignment: Alignment.center,
@@ -57,9 +74,14 @@ class MyHomePage extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: <Widget>[
-                    const AspectRatio(
+                    AspectRatio(
                       aspectRatio: 1,
-                      child: Placeholder(),
+                      child: _weatherCondition == ''
+                          ? const Placeholder()
+                          : SvgPicture.asset(
+                              _getWeatherPath(),
+                              semanticsLabel: _weatherCondition,
+                            ),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -93,32 +115,25 @@ class MyHomePage extends StatelessWidget {
               ),
               Expanded(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     const Padding(
                       padding: EdgeInsets.only(top: 80),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: const <Widget>[
-                        Padding(
-                          padding: EdgeInsets.only(top: 16, bottom: 16),
-                          child: TextButton(
-                            onPressed: null,
-                            child: Text(
-                              'Close',
-                              style: TextStyle(color: Colors.blue),
-                            ),
+                      children: <Widget>[
+                        const TextButton(
+                          onPressed: null,
+                          child: Text(
+                            'Close',
+                            style: TextStyle(color: Colors.blue),
                           ),
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(top: 16, bottom: 16),
-                          child: TextButton(
-                            onPressed: null,
-                            child: Text(
-                              'Reload',
-                              style: TextStyle(color: Colors.blue),
-                            ),
+                        TextButton(
+                          onPressed: _setWeatherCondition,
+                          child: const Text(
+                            'Reload',
+                            style: TextStyle(color: Colors.blue),
                           ),
                         ),
                       ],
@@ -130,7 +145,6 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       ),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
