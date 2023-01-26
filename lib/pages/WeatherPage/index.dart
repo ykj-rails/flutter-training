@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yumemi_weather/yumemi_weather.dart';
 
-// MyHomePageのState
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+// WeatherPageのState
+class WeatherPage extends StatefulWidget {
+  const WeatherPage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<WeatherPage> createState() => _WeatherPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _WeatherPageState extends State<WeatherPage> {
   String _weatherCondition = '';
 
   String _getWeatherCondition() {
@@ -41,9 +41,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flutter app'),
-      ),
       body: Container(
         alignment: Alignment.center,
         child: FractionallySizedBox(
@@ -105,9 +102,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
-                        const TextButton(
-                          onPressed: null,
-                          child: Text(
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text(
                             'Close',
                             style: TextStyle(color: Colors.blue),
                           ),
