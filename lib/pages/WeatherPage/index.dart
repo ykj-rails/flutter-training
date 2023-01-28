@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:yumemi_weather/yumemi_weather.dart';
+import 'package:flutter_training/pages/SplashPage/index.dart';
 
 // WeatherPageのState
 class WeatherPage extends StatefulWidget {
@@ -36,6 +37,16 @@ class _WeatherPageState extends State<WeatherPage> {
       default:
         return '';
     }
+  }
+
+  void handleSplashPage() {
+    Navigator.pushAndRemoveUntil<void>(
+      context,
+      MaterialPageRoute<void>(
+        builder: (context) => const SplashPage(),
+      ),
+      ModalRoute.withName('/'),
+    );
   }
 
   @override
@@ -103,9 +114,7 @@ class _WeatherPageState extends State<WeatherPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                          },
+                          onPressed: handleSplashPage,
                           child: const Text(
                             'Close',
                             style: TextStyle(color: Colors.blue),
