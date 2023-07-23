@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:yumemi_weather/yumemi_weather.dart';
 import 'package:flutter_training/pages/SplashPage/index.dart';
+import 'package:yumemi_weather/yumemi_weather.dart';
 
 // WeatherPageのState
 class WeatherPage extends StatefulWidget {
